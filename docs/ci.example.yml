@@ -1,0 +1,36 @@
+name: CI
+
+# يتحقق تلقائيًا من سلامة المشروع عند كل دفع أو طلب دمج:
+# تثبيت الحزم → فحص ESLint → بناء إنتاجي كامل (يشمل فحص TypeScript)
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  build:
+    name: Lint & Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint (ESLint)
+        run: npm run lint
+
+      - name: Build (Next.js + TypeScript)
+        run: npm run build
+        env:
+          # قيم بناء فقط — الواجهة العامة تُبنى بلا اتصال فعلي بقاعدة البيانات
+          NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: build-placeholder-anon-key
+          NEXT_PUBLIC_ROOT_DOMAIN: localhost:3000

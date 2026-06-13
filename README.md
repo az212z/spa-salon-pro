@@ -74,6 +74,29 @@ supabase link --project-ref <project-ref>
 supabase db push
 ```
 
+## النشر الحيّ (Vercel + Supabase سحابي)
+
+> ⚠️ هذا تطبيق Next.js كامل (مكوّنات خادم + middleware + قاعدة بيانات) — **لا يعمل على
+> GitHub Pages** التي تخدم ملفات ثابتة فقط. منصة النشر الصحيحة هي **Vercel**.
+
+1. **أنشئ مشروع Supabase سحابي** على [supabase.com](https://supabase.com)، ثم ادفع المخطط:
+   ```bash
+   supabase link --project-ref <project-ref>
+   supabase db push
+   docker exec ... < supabase/seed.sql   # أو شغّل seed على السحابة لصالون تجريبي
+   ```
+2. **اربط المستودع بـ Vercel** ([vercel.com/new](https://vercel.com/new)) واستورد `az212z/spa-salon-pro`.
+3. **أضف متغيرات البيئة** في Vercel:
+   | المتغير | القيمة |
+   |---|---|
+   | `NEXT_PUBLIC_SUPABASE_URL` | رابط مشروع Supabase السحابي |
+   | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | مفتاح anon من Supabase |
+   | `NEXT_PUBLIC_ROOT_DOMAIN` | نطاقك، مثل `spasalonpro.com` |
+4. **فعّل Wildcard Subdomains** (`*.spasalonpro.com`) ليحصل كل صالون على رابطه الفرعي.
+5. Vercel يبني وينشر تلقائيًا عند كل دفع — وملف `.github/workflows/ci.yml` يفحص lint والبناء أولًا.
+
+أو عبر سطر الأوامر: `vercel` ثم `vercel --prod` (يتطلب تسجيل دخول حسابك على Vercel).
+
 ## خطة البناء
 
 - [x] **المرحلة 0** — مخطط قاعدة البيانات متعدد المستأجرين + RLS + الأدوار ✅
