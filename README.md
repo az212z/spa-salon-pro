@@ -8,6 +8,18 @@
 > نظام حجوزات لحظي بلا تعارض · قاعدة عملاء وملف جمال · تذكيرات واتساب ·
 > ولاء وهدايا · تصميم فاخر بخط El Messiri وهوية وردية ذهبية.
 
+## 🌐 النسخة الحيّة
+
+| الصفحة | الرابط |
+|---|---|
+| المنصة | **https://spa-salon-pro.vercel.app** |
+| صالون تجريبي (لمسة) | https://spa-salon-pro.vercel.app/s/demo |
+| الحجز | https://spa-salon-pro.vercel.app/s/demo/book |
+| لوحة الإدارة | https://spa-salon-pro.vercel.app/s/demo/admin |
+
+مستضاف على **Vercel** + **Supabase سحابي** (Frankfurt). الدخول للإدارة برمز OTP
+يصل على بريد المالك المسجّل.
+
 ## التقنيات
 
 | المكوّن | الاختيار |
